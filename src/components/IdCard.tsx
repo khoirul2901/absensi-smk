@@ -241,7 +241,7 @@ export const IdCard: React.FC<IdCardProps> = ({ item, kategori }) => {
 
             {/* Signature Area */}
             <div className="self-end text-center text-[7px] text-gray-800 font-medium mr-2">
-              <p>Probolinggo, {today}</p>
+              <p>Sendang Mulyo, {today}</p>
               <p>Kepala Sekolah</p>
               <div className="mt-1 flex justify-center items-center h-[24px]">
                 {signatureUrl ? (
