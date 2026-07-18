@@ -834,6 +834,21 @@ function callMock(action: string, args: any[]): any {
       return { success: true, message: "Jadwal guru berhasil dihapus (SIMULASI)." };
     }
 
+    case "buatStrukturDatabaseOtomatis": {
+      localStorage.removeItem("MOCK_users");
+      localStorage.removeItem("MOCK_data_siswa");
+      localStorage.removeItem("MOCK_data_guru");
+      localStorage.removeItem("MOCK_laporan_siswa");
+      localStorage.removeItem("MOCK_laporan_guru");
+      localStorage.removeItem("MOCK_pengaturan_jam");
+      localStorage.removeItem("MOCK_hari_libur");
+      localStorage.removeItem("MOCK_data_kelas");
+      localStorage.removeItem("MOCK_jadwal_guru");
+      initMockDb();
+      localStorage.setItem("MOCK_jadwal_guru", JSON.stringify([]));
+      return { success: true, message: "Struktur database berhasil dibuat ulang (SIMULASI)!" };
+    }
+
     default:
       return { success: false, message: "Action not simulated: " + action };
   }
