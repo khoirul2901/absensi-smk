@@ -67,6 +67,33 @@ export default function App() {
     }
   }, []);
 
+  // Sync card settings from spreadsheet to localStorage when user is logged in
+  useEffect(() => {
+    if (session) {
+      callGas("getPengaturanSemua")
+        .then((res) => {
+          if (res && res.success !== false) {
+            const keys = [
+              'cardSchoolName',
+              'cardSchoolAddress',
+              'cardPrincipalName',
+              'cardSignatureUrl',
+              'cardLogoLeftUrl',
+              'cardLogoRightUrl'
+            ];
+            keys.forEach((key) => {
+              if (res[key] !== undefined) {
+                localStorage.setItem(getStorageKey(key), res[key]);
+              }
+            });
+          }
+        })
+        .catch((err) => {
+          console.error("Gagal sinkronisasi kartu pengaturan:", err);
+        });
+    }
+  }, [session]);
+
   const handleLoginSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoginError(null);
@@ -241,6 +268,14 @@ export default function App() {
             >
               {loading ? "Memverifikasi..." : "Masuk ke Sistem"}
             </button>
+
+            <a 
+              href="https://khoirul2901.github.io/PORTAL-AL-HIKAM/"
+              className="w-full bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-300 font-extrabold text-xs py-3 rounded-xl transition-all duration-150 flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <ExternalLink className="w-4 h-4 text-slate-400" />
+              Kembali ke Portal Al-Hikam
+            </a>
           </form>
 
           {usingMock && (
@@ -324,7 +359,7 @@ export default function App() {
         <header className="bg-slate-950 text-slate-400 p-4 border-b border-slate-800 flex justify-between items-center relative z-20">
           <div className="flex items-center gap-2.5">
             <GraduationCap className="w-6 h-6 text-blue-500" />
-            <h2 className="text-xs font-black text-white uppercase tracking-wider">SMK AL-HIKAM SIAS</h2>
+            <h2 className="text-xs font-black text-white uppercase tracking-wider">SMK AL-HIKAM</h2>
           </div>
           <button 
             onClick={() => setSidebarOpen(!sidebarOpen)}
