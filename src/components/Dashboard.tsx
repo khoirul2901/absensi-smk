@@ -321,7 +321,7 @@ export default function Dashboard() {
             <span className="bg-indigo-800/60 text-indigo-200 text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">
               Monitoring Real-Time
             </span>
-            <h1 className="text-2xl md:text-3xl font-bold tracking-tight">SMK Al-Hikam</h1>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight">SIAS SMK Al-Hikam</h1>
             <p className="text-blue-100/80 text-sm md:text-base leading-relaxed">
               Sistem Informasi Absensi Sekolah modern yang terintegrasi langsung dengan database Google Spreadsheet. Pantau kehadiran siswa dan guru hari ini.
             </p>
@@ -603,10 +603,12 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Full scale render strictly for standard window.print() output when Guru prints card */}
+      {/* Full scale render strictly for standard window.print() output when Guru prints card on A4 */}
       {isGuru && guruData && (
-        <div className="hidden print:flex flex-wrap justify-center gap-6 w-full p-4 h-screen items-center">
-          <IdCard item={guruData} kategori="Guru" />
+        <div className="hidden print:block w-full">
+          <div className="print-a4-page">
+            <IdCard item={guruData} kategori="Guru" />
+          </div>
         </div>
       )}
     </>
